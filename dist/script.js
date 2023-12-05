@@ -1,83 +1,99 @@
+// dropdown menu
+document.addEventListener("DOMContentLoaded", function () {
+  const categoryList = document.getElementById("categoryList");
+  const selectedContainer = document.querySelector(".selected-item");
+
+  function toggleDropdown() {
+    if (categoryList.style.display === "block") {
+      categoryList.style.display = "none";
+    } else {
+      categoryList.style.display = "block";
+    }
+  }
+
+  function closeDropdown(event) {
+    if (!event.target.closest(".custom-dropdown")) {
+      categoryList.style.display = "none";
+      document.body.removeEventListener("click", closeDropdown);
+    }
+  }
+
+  selectedContainer.addEventListener("click", function (event) {
+    event.stopPropagation();
+    toggleDropdown();
+
+    if (categoryList.style.display === "block") {
+      document.body.addEventListener("click", closeDropdown);
+    }
+  });
+});
+
+function redirectToPayment(package) {
+  // Mengarahkan pengguna ke halaman pembayaran dengan menyertakan parameter query string
+  window.location.href = `payment.html?package=${package}`;
+}
+
 let currentIndex = 0;
-    const feedbackEntries = document.querySelectorAll('.carousel-content .feedback-entry');
+const feedbackEntries = document.querySelectorAll(
+  ".carousel-content .feedback-entry"
+);
 
-    function showFeedback(index) {
-        const transformValue = `translateX(${-index * 100}%)`;
-        document.querySelector('.carousel-content').style.transform = transformValue;
-    }
+function showFeedback(index) {
+  const transformValue = `translateX(${-index * 100}%)`;
+  document.querySelector(".carousel-content").style.transform = transformValue;
+}
 
-    function prevFeedback() {
-        currentIndex = (currentIndex - 1 + feedbackEntries.length) % feedbackEntries.length;
-        showFeedback(currentIndex);
-    }
+function prevFeedback() {
+  currentIndex =
+    (currentIndex - 1 + feedbackEntries.length) % feedbackEntries.length;
+  showFeedback(currentIndex);
+}
 
-    function nextFeedback() {
-        currentIndex = (currentIndex + 1) % feedbackEntries.length;
-        showFeedback(currentIndex);
-    }
+function nextFeedback() {
+  currentIndex = (currentIndex + 1) % feedbackEntries.length;
+  showFeedback(currentIndex);
+}
 
-    // Initial display
-    showFeedback(currentIndex);
-        
-        function showElement(element) {
-          var hiddenDiv = element.querySelector("#hiddenDiv");
-          if (hiddenDiv) {
-            hiddenDiv.classList.remove("hidden");
-            hiddenDiv.classList.add("active");
-          }
-        }
-  
-        function hideElement(element) {
-          var hiddenDiv = element.querySelector("#hiddenDiv");
-          if (hiddenDiv) {
-            hiddenDiv.classList.remove("active");
-            hiddenDiv.addEventListener(
-              "transitionend",
-              function () {
-                hiddenDiv.classList.add("hidden");
-              },
-              { once: true }
-            );
-          }
-        }
+// Initial display
+showFeedback(currentIndex);
 
-        // move navbar to another page
-        var categorySelect = document.getElementById('categorySelect');
-        function redirectToPage() {
-            var select = document.getElementById("categorySelect");
-            var selectedOption = select.options[select.selectedIndex].value;
-        
-            // Redirect to the selected page based on the option value
-            switch (selectedOption) {
-                case "scholarship":
-                    window.location.href = "scholarship.html";
-                    break;
-                case "fellowship":
-                    window.location.href = "fellowship.html";
-                    break;
-                case "grants":
-                    window.location.href = "grants.html";
-                    break;
-                // Add more cases for other options
-                default:
-                    // Handle the default case, maybe redirect to a default page or do nothing
-                    break;
-            }
-        }
-        
+function showElement(element) {
+  var hiddenDiv = element.querySelector("#hiddenDiv");
+  if (hiddenDiv) {
+    hiddenDiv.classList.remove("hidden");
+    hiddenDiv.classList.add("active");
+  }
+}
 
-        var dropdownButton = document.getElementById('dropdownButton');
-        var dropdownMenu = document.getElementById('dropdownMenu');
-    
-        // Toggle visibility of the dropdown menu
-        dropdownButton.addEventListener('click', function() {
-            dropdownMenu.classList.toggle('hidden');
-        });
-    
-        // Close dropdown when clicking outside of it
-        document.addEventListener('click', function(event) {
-            var isClickInside = dropdownButton.contains(event.target) || dropdownMenu.contains(event.target);
-            if (!isClickInside) {
-                dropdownMenu.classList.add('hidden');
-            }
-        });
+function hideElement(element) {
+  var hiddenDiv = element.querySelector("#hiddenDiv");
+  if (hiddenDiv) {
+    hiddenDiv.classList.remove("active");
+    hiddenDiv.addEventListener(
+      "transitionend",
+      function () {
+        hiddenDiv.classList.add("hidden");
+      },
+      { once: true }
+    );
+  }
+}
+
+// dropdown button profile
+var dropdownButton = document.getElementById("dropdownButton");
+var dropdownMenu = document.getElementById("dropdownMenu");
+
+// Toggle visibility of the dropdown menu
+dropdownButton.addEventListener("click", function () {
+  dropdownMenu.classList.toggle("hidden");
+});
+
+// Close dropdown when clicking outside of it
+document.addEventListener("click", function (event) {
+  var isClickInside =
+    dropdownButton.contains(event.target) ||
+    dropdownMenu.contains(event.target);
+  if (!isClickInside) {
+    dropdownMenu.classList.add("hidden");
+  }
+});

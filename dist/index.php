@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scholarium</title>
-    <link rel="icon" href="./assets/image/web-logo.png" type="image/png">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="./assets/image/web-logo.png" type="image/png">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 
@@ -15,44 +18,46 @@
     <?php
     session_start();
     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) { ?>
-        <nav class="mt-0 w-full flex px-8 gap-3 top-2 fixed z-50 align-middle items-center">
+        <nav class="w-full flex px-8 gap-3 align-middle items-center justify-between relative">
             <div>
-                <a href="./index.html"><img src="./assets/image/letter-s.png" alt=""
-                        class="w-10 bg-white bg-opacity-90 backdrop-filter backdrop-blur-sm rounded-full"></a>
+                <a href="./indexLogged.html"><img src="./assets/image/letter-s.png" alt class="w-10"></a>
             </div>
-            <div class="flex bg-light px-3 rounded-xl w-[90%] align-middle">
+            <div class="flex bg-light px-3 rounded-xl w-[87%] sm:w-[50%] align-middle fixed z-50 top-[8px] ml-[54px]">
                 <div class="flex gap-3 rounded-lg w-[87%] mr-2">
-                    <img src="./assets/icon/Searching.svg" alt="" class="w-5">
+                    <img src="./assets/icon/Searching.svg" alt class="w-5">
                     <input type="search" placeholder="Search Something"
                         class="focus:outline-none bg-light py-3 rounded-sm text-sm w-full">
                 </div>
-                <span class="mt-[10px]">
-                    <span class="h-full border-l-2 border-gray-300"></span>
+                <span class="mt-[10px]  ">
+                    <span class="h-full mr-12 border-l-2 border-gray-300"></span>
                 </span>
-                <select name="category" id="categorySelect" onchange="redirectToPage()"
-                    class="bg-light focus:outline-none rounded-md cursor-pointer text-sm ml-2">
-                    <option value="website" selected disabled>Category</option>
-                    <option value="scholarship">Scholarship</option>
-                    <option value="fellowship">Fellowship</option>
-                    <option value="grants">Grants</option>
-                    <option value="volunteer">Volunteer</option>
-                    <option value="event">Event</option>
-                    <option value="competition">Competition</option>
-                    <option value="cultural-exchange">Cultural Exchange</option>
-                    <option value="workshop">Workshop</option>
-                    <option value="training-center">Training Center</option>
-                </select>
+                <div class="custom-dropdown" onclick="toggleDropdown(event)">
+                    <div class="selected-item">Category</div>
+                    <ul class="dropdown-list" id="categoryList">
+                        <li data-value="scholarship" class="dropdown-item"><a href="./scholarshipPage.php">Scholarship</a>
+                        </li>
+                        <li data-value="fellowship" class="dropdown-item"><a href="./fellowship.html">Fellowship</a></li>
+                        <li data-value="grants" class="dropdown-item"><a href="./grants.html">Grants</a></li>
+                        <li data-value="volunteer" class="dropdown-item"><a href="./volunteer.html">Volunteer</a></li>
+                        <li data-value="event" class="dropdown-item"><a href="./event.html">Event</a></li>
+                        <li data-value="competition" class="dropdown-item"><a href="./competition.html">Competition</a></li>
+                        <li data-value="cultural-exchange" class="dropdown-item"><a
+                                href="./interchange.html">Interchange</a></li>
+                        <li data-value="workshop" class="dropdown-item"><a href="./workshop.html">Workshop</a></li>
+                        <li data-value="training-center" class="dropdown-item"><a href="./training.html">Training</a></li>
+                    </ul>
+                </div>
+                <img src="./assets/icon/dropdown.svg" alt class="relative left-[3px]">
             </div>
             <div class="ml-2 relative">
                 <button id="dropdownButton" class="focus:outline-none">
-                    <img src="./assets/image/login-icon.svg" alt="" class="w-10 mt-2">
+                    <img src="./assets/image/login-icon.svg" alt class="w-10 mt-3">
                 </button>
                 <!-- Dropdown Menu -->
                 <div id="dropdownMenu" class="hidden absolute right-0 mt-2 bg-night rounded-md shadow-md px-2 py-3">
                     <a href="#" class="block px-4 py-2 text-sm text-white hover:text-light">Profile</a>
                     <a href="#" class="block px-4 py-2 text-sm text-white hover:text-light">Settings</a>
-                    <a href="../dist/controller/logout.php?logout=true"
-                        class="block px-4 py-2 text-sm text-white hover:text-light">Logout</a>
+                    <a href="#" class="block px-4 py-2 text-sm text-white hover:text-light">Logout</a>
                 </div>
                 <!-- End Dropdown Menu -->
             </div>
