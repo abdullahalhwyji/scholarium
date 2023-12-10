@@ -11,7 +11,7 @@ if (isset($_GET['logout'])) {
     session_destroy();
 
     // Redirect to a login page or elsewhere after logout
-    header("Location: ../index.php");
+    header("Location: ../users_pages/index.php");
     exit;
 }
 ?>

@@ -1,9 +1,9 @@
-<?php 
-include ('connection.php');
+<?php
+include('connection.php');
 
 $sql = "INSERT INTO users (first_name, last_name, email, phone_number, password_hash, degree, country) values (?, ?, ?, ?, ?, ?, ?)";
 
-$stmt = $conn ->prepare($sql);
+$stmt = $conn->prepare($sql);
 
 if (!$stmt) {
     die("Prepare failed: " . $conn->error);
@@ -21,7 +21,7 @@ $country = $_POST['country'];
 $stmt->bind_param("sssisss", $firstName, $lastName, $email, $phoneNumber, $hashedPassword, $degree, $country);
 
 if ($stmt->execute()) {
-    echo 'success';
+    header("Location: ../users_pages/login.html");
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

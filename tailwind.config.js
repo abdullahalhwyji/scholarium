@@ -1,13 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./dist/*.{html,js}"],
+  content: ["../dist/users_pages/*.{html,js}"],
   theme: {
     extend: {
       backgroundImage: {
-        'hero-pattern': "url('./assets/image/graduate.jpg')",
-        'login': "url('./assets/image/login-icon.svg')",
-
-        
+        'hero-pattern': "url('../dist/users_pages/image/graduate.jpg')",
+        'login': "url('./dist/assets/image/login-icon.svg')", 
       },
       fontFamily:{
         'Raleway' : ['Raleway', 'sans-serif'],

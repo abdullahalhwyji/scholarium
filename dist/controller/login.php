@@ -36,11 +36,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Start a session or perform necessary actions
                     session_start();
                     $_SESSION['logged_in'] = true;
-                    $_SESSION['user_id'] = $user['id'];
+                    $_SESSION['user_id'] = $user['user_id'];
+
                     $_SESSION['email'] = $user['email'];
 
 
-                    header("Location: ../index.php");
+                    header("Location: ../users_pages/index.php");
                     exit();
                 } else {
 
@@ -58,6 +59,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Handle empty fields
         echo "Email and password are required";
     }
+
+    echo "User ID in session: " . $_SESSION['user_id'];
 
     // Close connection
     $conn->close();
