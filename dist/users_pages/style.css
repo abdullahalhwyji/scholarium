@@ -1886,3 +1886,60 @@ video {
     line-height: 2.5rem;
   }
 }
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensure modal appears above other content */
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  text-align: center;
+  position: relative;
+  animation: modal-animation 0.3s ease-out forwards; /* Animation */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Box shadow for depth */
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  max-width: 80%; /* Limit the width of the modal */
+}
+
+/* Animation keyframes */
+@keyframes modal-animation {
+  from {
+      opacity: 0;
+      transform: scale(0.7) translate(-50%, -50%);
+  }
+  to {
+      opacity: 1;
+      transform: scale(1) translate(-50%, -50%);
+  }
+}
+
+.modal h2 {
+  margin-top: 0;
+}
+
+.modal p {
+  margin-bottom: 20px;
+}
+
+.modal button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+

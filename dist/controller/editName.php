@@ -17,7 +17,7 @@ if (isset($_POST['newFirstName'])) {
 
     if ($stmt->execute()) {
         // Update successful
-        echo "First name updated successfully!";
+        header('location: ../users_pages/profile.php');
     } else {
         // Update failed
         echo "Error updating first name: " . $conn->error;

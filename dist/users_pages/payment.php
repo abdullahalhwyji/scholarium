@@ -9,7 +9,31 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     header('Location: ./login.html');
     exit();
 }
+
+
 ?>
+
+<?php
+session_start();
+
+if (isset($_SESSION['payment_success']) && $_SESSION['payment_success']) {
+    echo "<script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const modal = document.getElementById('successModal');
+            modal.style.display = 'block';
+
+            // Close modal and redirect on 'Continue' click
+            const continueButton = document.getElementById('continueButton');
+            continueButton.addEventListener('click', function () {
+                modal.style.display = 'none';
+                window.location.href = './index.php'; // Redirect to index page or appropriate location
+            });
+        });
+    </script>";
+
+    unset($_SESSION['payment_error']);
+    unset($_SESSION['payment_success']);
+} ?>
 
 <?php
 if (isset($_GET['package'])) {
@@ -32,7 +56,7 @@ if (isset($_GET['package'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Scholarium</title>
     <link rel="icon" href="./image/web-logo.png" type="image/png" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./style.css" />
 </head>
 
 <body class="font-Raleway">
@@ -193,6 +217,22 @@ if (isset($_GET['package'])) {
             </div>
         </div>
     </main>
+    <!-- This goes within your HTML -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <h2>Payment Status</h2>
+            <?php
+            // Display appropriate message based on payment success/failure
+            if (isset($_SESSION['payment_success']) && $_SESSION['payment_success'] === true) {
+                echo "<p>Your payment was successful!</p>";
+            } else {
+                echo "<p>Payment failed. Error: " . $_SESSION['payment_error'] . "</p>";
+            }
+            ?>
+            <button id="continueButton">Continue</button>
+        </div>
+    </div>
+
     <script src="./assets/js/payment.js"></script>
 </body>
 

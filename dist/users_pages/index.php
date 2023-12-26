@@ -1,16 +1,10 @@
 <?php
 session_start();
 
-// Assuming user login logic here which fetches user details including user ID
-// For example, after successful login:
-if ($login_successful) {
-    $_SESSION['logged_in'] = true;
-    $_SESSION['user_id'] = $user['id']; // Set the user ID in the session
-    // Redirect to a different page or display content as needed
-    header('Location: payment_page.php');
-    exit();
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+    $userId = $_SESSION['user_id'];
 } else {
-    // Handle unsuccessful login
+
 }
 ?>
 
@@ -84,7 +78,7 @@ if ($login_successful) {
         ?>
         <nav class=" w-full flex px-8 gap-3 top-2  z-50 align-middle justify-between items-center">
             <div class="mt-2">
-                <a href="./index.html"><img src="./assets/image/letter-s.png" alt
+                <a href="./index.html"><img src="./image/letter-s.png" alt=""
                         class="w-10 bg-white bg-opacity-90 backdrop-filter backdrop-blur-sm rounded-full"></a>
             </div>
 

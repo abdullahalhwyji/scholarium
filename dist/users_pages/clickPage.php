@@ -1,6 +1,27 @@
 <?php
 
 session_start();
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+    $userId = $_SESSION['user_id'];
+} else {
+
+    header('Location: ./login.html');
+    exit();
+}
+
+?>
+
+<?php
+include('../controller/connection.php');
+
+$scholarship_id = $_GET['id'];
+$check_query = "SELECT * FROM likes WHERE user_id = ? AND scholarship_id = ?";
+$check_statement = mysqli_prepare($conn, $check_query);
+mysqli_stmt_bind_param($check_statement, 'ii', $userId, $scholarship_id);
+mysqli_stmt_execute($check_statement);
+mysqli_stmt_store_result($check_statement);
+
+$alreadyLiked = mysqli_stmt_num_rows($check_statement) > 0;
 ?>
 
 <?php
@@ -149,9 +170,13 @@ if (isset($_GET['id'])) {
             </div>
             <div class="flex">
                 <div class="flex gap-4 ml-8 mt-2 mr-4">
-                    <button id="like" class="w-6 h-5 mt-4">
-                        <a href="./controller/likes_scholarship.php?id=<?php echo $scholarship_id; ?>&action=like">
-                            <img src="../assets/icon/heart.png" alt="">
+                    <button id="like" class="w-6 h-5 mt-4 ">
+                        <a href="../controller/likes_scholarship.php?id=<?php echo $scholarship_id; ?>&action=like">
+                            <?php if ($alreadyLiked): ?>
+                                <img src="../assets/icon/heart-filled.png" alt="">
+                            <?php else: ?>
+                                <img src="../assets/icon/heart.png" alt="">
+                            <?php endif; ?>
                         </a>
                     </button>
                     <p class="text-lg font-semibold mt-3.5">
